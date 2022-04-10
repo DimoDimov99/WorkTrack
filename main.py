@@ -30,4 +30,4 @@ if __name__ == "__main__":
     while user_input != "quit":
         mark_goal()
         user_input = input("Choose a command to begin: ").lower()
-    print("Quiting the app...")
+    print("Quitting the app...")

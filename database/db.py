@@ -37,14 +37,14 @@ def mark_todo_finished():
         "SELECT * FROM todos WHERE todo_name=?", (user_input,))
     is_in_todos = list(check)
     if is_in_todos:
-        print(f"The todo [{user_input}] is found! Updating it's status!")
+        print(f"The todo [{user_input}] is found! Updating its status!")
         cursor.execute(
             f"UPDATE todos SET finished='1' WHERE todo_name=?", (
                 user_input,))
         cursor.execute(f"UPDATE todos SET time_stamp=?", (current_time,))
     else:
         print(
-            f"Sorry the provided todo [{user_input}] is not presented in the todos, double check!")
+            f"Sorry, the provided todo [{user_input}] is not present in the todos, double check!")
     test_input = input("Resolve the program? : (Y): ")
     connection.commit()
     connection.close()
@@ -60,13 +60,13 @@ def mark_todo_not_finished():
         "SELECT * FROM todos WHERE todo_name=?", (user_input,))
     is_in_todos = list(check)
     if is_in_todos:
-        print(f"The todo [{user_input}] is found! Update his status!")
+        print(f"The todo [{user_input}] is found! Updating its status!")
         cursor.execute(
             "UPDATE todos SET finished='0' WHERE todo_name=?", (user_input,))
         cursor.execute(f"UPDATE todos SET time_stamp=?", (current_time,))
     else:
         print(
-            f"Sorry the provided todo [{user_input}] is not presented in the todos, double check!")
+            f"Sorry, the provided todo [{user_input}] is not present in the todos, double check!")
     test_input = input("Resolve the program? : (Y): ")
     connection.commit()
     connection.close()
