@@ -7,13 +7,13 @@ import sys
 HOME_PATH = os.getcwd()  # get user main directory path
 
 commands = {
-    "track": "begin to track a activity",
+    "track": "begin to track an activity",
     "list": "list the content of selected txt file",
     "time": "print current time in the console",
     "clear": "clear output in the terminal",
     "save": "save all content from txt file inside full_info.txt in the respective directory",
     "quit": "quit the application",
-    "hours check": "list how much work is done for specific day",
+    "hours check": "list how much work is done for a specific day",
     "todo": "trigger todo app menu"
 }
 
@@ -73,7 +73,7 @@ def display_working_dir() -> None:
 
 
 def work_task_track() -> None:  # helper function now!
-    """This function when called write to a given .txt file the tasks that we are working on"""
+    """This function writes to a given .txt file the tasks that we are working on"""
     clear()
     display_work_directory_txt_files()
     text_file_name = datetime.today().strftime("%A")
@@ -87,7 +87,7 @@ def work_task_track() -> None:  # helper function now!
     elif work_beginning.lower() == "n":
         print("Delimiter not addded!")
     else:
-        print("Invalid input please double check!")
+        print("Invalid input, please double check!")
         return -1
     user_input = input("Please enter the task you are working on: ")
     project = input("Does you know the project for the task? (Y/N): ")
@@ -119,13 +119,13 @@ def work_task_track() -> None:  # helper function now!
             file.write("\n")
         return -1
     elif activity_begin.lower() != "n" and activity_begin.lower() != "y":
-        print("Invalid input please double check!")
+        print("Invalid input, please double check!")
         return -1
     if activity_end.lower() == "y":
         end_time = datetime.now().strftime('%H:%M:%S')
         end_time_int = time_to_num(end_time)
         result = end_time_int - begin_time_int
-        print(f"Task finished! it took you: [ {display_time(result)} ]")
+        print(f"Task finished! It took you: [ {display_time(result)} ]")
 
         with open(text_file_name, "a", encoding="utf8") as file:
             file.write(
@@ -142,15 +142,15 @@ def work_task_track() -> None:  # helper function now!
             file.write(40 * "-")
             file.write("\n")
     elif activity_end.lower() != "y" and activity_end.lower() != "n":
-        print("Invalid input please double check!")
+        print("Invalid input, please double check!")
         return -1
     work_ending = input("End of the workday (Y/N)?: ")
     if work_ending.lower() == "y":
         delimiter()
     elif work_ending.lower() == "n":
-        print("delimiter not addded!")
+        print("Delimiter not addded!")
     else:
-        print("Invalid input please double check!")
+        print("Invalid input, please double check!")
         return -1
 
 #************************#
@@ -183,7 +183,8 @@ def work_task_track() -> None:  # helper function now!
 
 
 def work_task_creation() -> None:
-    """This function invoke work_task_track() and it's the core function of the program. Log and write the work tasks that we are doing to a .txt file"""  # main track function
+    """This function invokes work_task_track() and it's the core function of the program.
+    Log and write the work tasks that we are doing to a .txt file"""  # main track function
     current_path = os.getcwd()
     print(current_path)
     if current_path != HOME_PATH:
@@ -196,7 +197,7 @@ def work_task_creation() -> None:
         print(f"Switched to {current_day} dir!")
         work_task_track()
     else:
-        print(f"{current_day} directory is missing!!!. Creating now....")
+        print(f"{current_day} directory is missing!!! Creating now....")
         os.makedirs(destination_path)
         os.chdir(destination_path)
         work_task_track()
@@ -224,7 +225,7 @@ def list_tasks() -> None:
     clear()
     display_working_dir()
     display_txt_files()
-    txt_input = input("Which txt file woud you like to list: ")
+    txt_input = input("Which txt file would you like to list: ")
     txt_input += ".txt"
     try:
         print("\n")
@@ -282,7 +283,7 @@ def save_info() -> None:
                 for line in file:
                     saved_info.write(line)
             print(
-                f"Succesfuly saved the content of {filename} saved into full-info.txt! inside: {os.getcwd()}")
+                f"Successfully saved the content of {filename} into full-info.txt! inside: {os.getcwd()}")
     except FileNotFoundError:
         print(f"The file {filename} does not exist!")
 
@@ -310,8 +311,8 @@ def print_found_hours() -> None:
     clear()
     display_working_dir()
     display_txt_files()
-    check_phrase_month = input("For which month you want to check?: ")
-    check_phrase_day = input("For which day you want to check?: ")
+    check_phrase_month = input("For which month do you want to check?: ")
+    check_phrase_day = input("For which day do you want to check?: ")
     # check_phrase_year to implement
 
     phrase = f"FINISHED {check_phrase_month.capitalize()} {check_phrase_day}"

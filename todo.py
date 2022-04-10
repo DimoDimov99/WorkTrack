@@ -36,7 +36,7 @@ def todo_menu():
             prompt_delete_todo()
         user_input = input(USER_CHOICE)
     if user_input == "quit":
-        print("[Quting the todo app and resolving to main screen...]")
+        print("[Quitting the todo app and resolving to main screen...]")
         print("\n")
 
 
