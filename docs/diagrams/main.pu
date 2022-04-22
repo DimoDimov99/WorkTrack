@@ -1,0 +1,41 @@
+@startuml main.py
+title main.py
+
+start
+(U)
+-> input();
+while (use case)
+switch ()
+case ("track")
+    !includesub utils.pu!work_task_creation
+
+case ("list")
+    !includesub utils.pu!list_tasks
+
+case ("time")
+    !includesub utils.pu!current_time
+
+case ("clear")
+    !includesub utils.pu!clear
+
+case ("save")
+    !includesub utils.pu!save_info
+
+case ("commands")
+    !includesub utils.pu!print_commands
+
+case ("hours check")
+    !includesub utils.pu!print_found_hours
+
+case ("todo")
+    !includesub todo.pu!todo_menu
+
+case (other)
+    :error msg;
+
+endswitch
+
+endwhile ("quit")
+stop
+
+@enduml

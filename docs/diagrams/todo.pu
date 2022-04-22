@@ -1,0 +1,10 @@
+@startuml todo.py
+
+!startsub todo_menu
+    :todo_menu()|
+    #red:TODO]
+!endsub
+detach
+
+
+@enduml

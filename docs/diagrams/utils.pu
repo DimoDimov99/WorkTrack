@@ -1,0 +1,112 @@
+@startuml utils.py
+
+!startsub work_task_creation
+    :work_task_creation()|
+    if (current day dir) then (no)
+        :make dir;
+    else (yes)
+    endif
+    :work_task_track()|
+    #red:TODO]
+!endsub
+detach
+
+!startsub list_tasks
+    :list_tasks()|
+    :list_all_dirs();
+    (U)
+    -> input();
+    :choose dir;
+    if (dir exists) then (yes)
+        :display_txt_files();
+        (U)
+        -> input();
+        :choose file;
+        if (file exists) then (yes)
+            :print file;
+        else (no)
+            :error msg;
+        endif
+    else (no)
+        :error msg;
+        :return -1>
+    endif
+!endsub
+detach
+
+!startsub current_time
+    :current_time()|
+    :print time;
+!endsub
+detach
+
+!startsub clear
+    :clear();
+!endsub
+detach
+
+!startsub save_info
+    :save_info()|
+    :list_all_dirs();
+    (U)
+    -> input();
+    :choose dir;
+    if (dir exists) then (yes)
+        :display_txt_files();
+        (U)
+        -> input();
+        :choose file;
+        if (file exists) then (yes)
+            :append file to\n "full-info.txt";
+        else (no)
+            :error msg;
+        endif
+    else (no)
+        :error msg;
+        :return -1>
+    endif
+!endsub
+detach
+
+!startsub print_commands
+    :print_commands()|
+    group for each command
+    :print \n"command -> description";
+    end group
+!endsub
+detach
+
+!startsub print_found_hours
+    :print_found_hours()|
+    :list_all_dirs();
+    (U)
+    -> input();
+    :choose dir;
+    if (dir exists) then (yes)
+        :display_txt_files();
+        (U)
+        -> input();
+        :choose date
+        choose file;
+        if (file exists) then (yes)
+            group for each line
+            if (line matches date) then (yes)
+                :print line;
+                :store line;
+            endif
+            end group
+            (U)
+            -> input();
+            if (save?) then (yes)
+                :write stored info to \n"tasks-completed.txt";
+            endif
+        else (no)
+            :error msg;
+        endif
+    else (no)
+        :error msg;
+        :return -1>
+    endif
+!endsub
+
+@enduml
