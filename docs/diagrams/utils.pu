@@ -7,7 +7,58 @@
     else (yes)
     endif
     :work_task_track()|
-    #red:TODO]
+    :display_work_directory_txt_files();
+    :get date;
+    (U)
+    -> input();
+    if (start of day) then (yes)
+        :delimiter()|
+        :get date;
+        :write date to
+        "Weekday_work_done.txt";
+        :delimiter returns>
+    endif
+    (U)
+    -> input();
+    :enter task
+    enter project?;
+    switch (begin project)
+    case ("yes")
+        :get start time;
+        :write started task to
+        "Weekday_work_done.txt";
+        (U)
+        -> input();
+        switch (done)
+        case ("yes")
+            :get end time;
+            :show duration;
+            :write finished task to
+            "Weekday_work_done.txt";
+        case ("no")
+            :task aborted msg;
+            :write aborted task to
+            "Weekday_work_done.txt";
+        case (other)
+            :error msg;
+            :return -1>
+        endswitch
+    case ("no")
+        :task aborted msg;
+        :write aborted task to
+        "Weekday_work_done.txt";
+        :return -1>
+        detach
+    case (other)
+        :error msg;
+        :return -1>
+        detach
+    endswitch
+    (U)
+    -> input();
+    if (end of day) then (yes)
+        :delimiter();
+    endif
 !endsub
 detach
 
